@@ -32,9 +32,9 @@ I_MAIN --> R_MAIN
 Trainer --> START
 
 ' ===== FINDABILITY =====
-(Define metadata standards\nF2) as F1 #d0e2ff
+(Define metadata standards using resources like FAIRsharing\nF2) as F1 #d0e2ff
 (Use Bioschemas training\nprofile\nF2) as F2 #d0e2ff
-(Deposit in Zenodo\nassign DOI\nF1/F3) as F3 #cfe8f3
+(Deposit in Zenodo\nassign DOI to the materials and\n ORCID for the trainers\nF1/F3) as F3 #cfe8f3
 (Register materials in TeSS\nF4) as F4 #d0e2ff
 
 F_MAIN --> F1
@@ -43,8 +43,8 @@ F1 --> F3
 F3 --> F4
 
 ' ===== ACCESSIBILITY =====
-(Provide access in the metadata\nHTTPS or API\nA1.1) as A1 #d9f2d9
-(Restrict access if needed\nvia LMS authentication\nA1.2) as A2 #d9f2d9
+(Provide details of the access in the metadata\nrestricted or open\nA1.1) as A1 #d9f2d9
+(Restrict access if needed\nA1.2) as A2 #d9f2d9
 (Ensure metadata remains\naccessible\nA2/F1) as A3 #e2f0d9
 
 A_MAIN --> A1
@@ -52,7 +52,7 @@ A1 --> A2 : extend
 A2 --> A3
 
 ' ===== INTEROPERABILITY =====
-(Develop materials using\nGitHub platform\nI1/R) as I1 #fff4cc
+(Develop materials using\nGitHub bassed platform\nI1/R) as I1 #fff4cc
 (Use community lesson templates:\nCarpentries, ELIXIR\nI2/R) as I2 #fff4cc
 (Use FAIR vocabularies via\nFAIRsharing\nI2) as I3 #fff8dc
 (Link tools, datasets,\nand assessments via DOI\nI3) as I4 #fdebd0
@@ -65,10 +65,10 @@ I3 --> I4 : include
 I4 --> I5 : extend
 F1 --> I3 : extend
 ' ===== REUSABILITY =====
-(Provide clear and\naccessible license\nR1.1) as R1 #f8d7da
+(Provide clear and\naccessible license details\n in the metadata\nR1.1) as R1 #f8d7da
 (Track provenance with\nrich metadata on GitHub or Zenodo\nR1.2/I3) as R2 #f8d7da
 (Version releases via\nGitHub or Zenodo\nR1.2/I3) as R3 #f5c6cb
-(Use community and\ndomain standards\nR1.3/I2) as R4 #f5c6cb
+(Use community and\ndomain standards via FAIRsharing\nR1.3/I2) as R4 #f5c6cb
 
 R_MAIN --> R1
 R1 --> R2
@@ -78,7 +78,7 @@ F1 --> R1 : extend
 
 ' ===== USER SIDE =====
 (Search materials via TeSS\nF) as U1 #d0e2ff
-(Access via Zenodo or LMS\nA) as U2 #d9f2d9
+(Access via links in metadata as\n in Zenodo or LMS\nA) as U2 #d9f2d9
 (Reuse following FAIR\nprinciples\nR) as U3 #f8d7da
 
 Trainee --> U1
