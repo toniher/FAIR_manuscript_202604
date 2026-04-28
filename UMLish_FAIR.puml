@@ -1,6 +1,6 @@
 @startuml
 
-left to right direction
+top to bottom direction
 skinparam packageStyle rectangle
 
 skinparam usecase {
@@ -15,17 +15,16 @@ actor Trainee
 
 rectangle "Minimum steps to make FAIR training materials\nbased on community experience" {
 
+' ===== TRAINER: MATERIAL CREATION WORKFLOW =====
 (Develop training materials) as START
 
-(Make Findable) as F_MAIN #d0e2ff
-(Make Accessible) as A_MAIN #d9f2d9
-(Make Interoperable) as I_MAIN #fff4cc
-(Make Reusable) as R_MAIN #f8d7da
+(Define learning objectives,\ntarget audience and format\n) as DEV1 #e8e8ff
+(Create training content\n[slides, exercises, assessments]\n) as DEV2 #e8e8ff
+(Select and integrate\nFAIR tools and datasets\n) as DEV3 #e8e8ff
 
-START --> F_MAIN
-F_MAIN --> A_MAIN
-A_MAIN --> I_MAIN
-I_MAIN --> R_MAIN
+START --> DEV1
+DEV1 --> DEV2
+DEV2 --> DEV3
 
 Trainer --> START
 
@@ -35,7 +34,7 @@ Trainer --> START
 (Deposit in Zenodo\nassign DOI to the materials and\n ORCID for the trainers\nF1/F3) as F3 #cfe8f3
 (Register materials in TeSS\nF4) as F4 #d0e2ff
 
-F_MAIN --> F1
+DEV3 --> F1
 F1 --> F2 : extend
 F1 --> F3
 F3 --> F4
@@ -45,44 +44,63 @@ F3 --> F4
 (Provide details of authentication\n and authorisation if needed e.g.LMS\nA1.2) as A2 #d9f2d9
 (Ensure metadata remains\naccessible\nA2/F1) as A3 #e2f0d9
 
-A_MAIN --> A1
+F4 --> A1
 A1 --> A2 : extend
 A2 --> A3
 
 ' ===== INTEROPERABILITY =====
-(Develop materials using\nGitHub bassed platform\nI1/R) as I1 #fff4cc
+(Develop materials using\nGitHub based platform\nI1/R) as I1 #fff4cc
 (Use community lesson templates:\nCarpentries, ELIXIR\nI2/R) as I2 #fff4cc
 (Use FAIR vocabularies via\nFAIRsharing\nI2) as I3 #fff8dc
 (Link tools, datasets,\nand assessments via DOI\nI3) as I4 #fdebd0
 (For LMS, package content using\nLMS standards\nI3) as I5 #fff8dc
 
-I_MAIN --> I1
+A3 --> I1
 I1 --> I2 : include
 I2 --> I3 : include
 I3 --> I4 : include
 I4 --> I5 : extend
 F1 --> I3 : extend
+
 ' ===== REUSABILITY =====
 (Provide clear and\naccessible license details\n in the metadata\nR1.1) as R1 #f8d7da
 (Track provenance with\nrich metadata on GitHub or Zenodo\nR1.2/I3) as R2 #f8d7da
 (Version releases via\nGitHub or Zenodo\nR1.2/I3) as R3 #f5c6cb
 (Use community and\ndomain standards via FAIRsharing\nR1.3/I2) as R4 #f5c6cb
 
-R_MAIN --> R1
+I4 --> R1
 R1 --> R2
 R2 --> R3 : include
 R3 --> R4
 F1 --> R1 : extend
 
-' ===== USER SIDE =====
-(Search materials via TeSS\nF) as U1 #d0e2ff
-(Access via links in metadata as\n in Zenodo or LMS\nA) as U2 #d9f2d9
-(Reuse following FAIR\nprinciples\nR) as U3 #f8d7da
+' ===== FAIR GOAL =====
+(Training materials are\nFindable · Accessible\nInteroperable · Reusable) as GOAL #ffd966
+
+R4 --> GOAL
+Trainer ..> GOAL : <<achieve>>
+Trainer2 ..> GOAL : <<achieve>>
+
+' ===== TRAINEE: LEARNER JOURNEY =====
+(Search and discover materials\nvia TeSS\nF) as U1 #d0e2ff
+(Access materials via links\nin metadata [Zenodo or LMS]\nA) as U2 #d9f2d9
+(Follow and complete\ntraining materials\n) as U3 #f8d7da
 
 Trainee --> U1
 U1 --> U2
 U2 --> U3
-Trainer2 --> U3
+
+' ===== TRAINER2: MATERIAL ADAPTATION WORKFLOW =====
+(Find existing FAIR materials\nvia TeSS or Zenodo\nF) as T2_1 #d0e2ff
+(Access and evaluate\nexisting materials\nA) as T2_2 #d9f2d9
+(Adapt and remix materials\nwith proper attribution\nR1.1/R1.2) as T2_3 #f8d7da
+(Re-publish adapted version\nfollowing FAIR workflow\n) as T2_4 #e8e8ff
+
+Trainer2 --> T2_1
+T2_1 --> T2_2
+T2_2 --> T2_3
+T2_3 --> T2_4
+T2_4 --> F1 : include
 
 }
 
